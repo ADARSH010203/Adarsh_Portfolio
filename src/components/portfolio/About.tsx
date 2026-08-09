@@ -27,20 +27,22 @@ function Counter({ target, suffix = '', duration = 2 }: { target: number; suffix
 
 function CountUp({ target, suffix, duration }: { target: number; suffix: string; duration: number }) {
   const ref = useRef<HTMLSpanElement>(null);
+  const hasAnimated = useRef(false);
 
-  if (typeof window === 'undefined') return <span>0</span>;
+  useEffect(() => {
+    if (hasAnimated.current || !ref.current) return;
+    hasAnimated.current = true;
+    const start = Date.now();
+    function tick() {
+      if (!ref.current) return;
+      const progress = Math.min((Date.now() - start) / (duration * 1000), 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      ref.current.textContent = Math.floor(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }, [target, suffix, duration]);
 
-  const start = Date.now();
-
-  function tick() {
-    if (!ref.current) return;
-    const progress = Math.min((Date.now() - start) / (duration * 1000), 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    ref.current.textContent = Math.floor(eased * target) + suffix;
-    if (progress < 1) requestAnimationFrame(tick);
-  }
-
-  requestAnimationFrame(tick);
   return <span ref={ref}>0</span>;
 }
 

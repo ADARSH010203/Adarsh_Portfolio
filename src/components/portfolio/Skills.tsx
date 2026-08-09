@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useMemo } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Search, ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -240,16 +240,15 @@ function CategoryCard({ category, index, searchQuery }: { category: SkillCategor
 }
 
 function SkillParticles() {
-  const particles = useMemo(() => {
-    return Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: 1 + Math.random() * 2,
-      duration: 8 + Math.random() * 12,
-      delay: Math.random() * 5,
-    }));
-  }, []);
+  // Deterministic particle positions to avoid hydration mismatch
+  const particles = Array.from({ length: 20 }, (_, i) => ({
+    id: i,
+    x: ((i * 37 + 13) % 97) + 1.5,
+    y: ((i * 53 + 7) % 93) + 3.5,
+    size: 1 + (i % 3) * 0.7,
+    duration: 8 + (i % 5) * 2.4,
+    delay: (i % 7) * 0.7,
+  }));
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">

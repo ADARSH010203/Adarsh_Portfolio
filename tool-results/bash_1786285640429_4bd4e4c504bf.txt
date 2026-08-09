@@ -1,0 +1,1634 @@
+✓ Adarsh Kumar | AI/ML Engineer
+  http://localhost:3000/
+---CONSOLE---
+[info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[log] [HMR] connected
+[error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>
+      <SegmentViewNode type="page" pagePath="page.tsx">
+        <SegmentTrieNode>
+        <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
+          <Home params={Promise} searchParams={Promise}>
+            <LoadingScreen>
+            <CustomCursor>
+            <ScrollProgress>
+            <div className="min-h-scre...">
+              <LoadableComponent>
+              <LoadableComponent>
+              <LoadableComponent>
+              <div className="relative z...">
+                <Navbar>
+                <main className="flex-1">
+                  <Hero>
+                  <About>
+                  <Skills>
+                    <section id="skills" className="relative p...">
+                      <SkillParticles>
+                        <div className="absolute i..." aria-hidden="true">
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.5266623098483807
+-                               width: "1.26354px"
++                               height: 2.5266623098483807
+-                               height: "1.26354px"
++                               left: "55.84349426615783%"
+-                               left: "64.7876%"
++                               top: "58.80871828699944%"
+-                               top: "4.32397%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.3549245347606431
+-                               width: "1.01212px"
++                               height: 1.3549245347606431
+-                               height: "1.01212px"
++                               left: "16.222086196275708%"
+-                               left: "72.437%"
++                               top: "62.01652757278515%"
+-                               top: "99.5756%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.6932588154051083
+-                               width: "1.69321px"
++                               height: 1.6932588154051083
+-                               height: "1.69321px"
++                               left: "89.65524610288249%"
+-                               left: "63.3294%"
++                               top: "10.985157400041356%"
+-                               top: "17.0378%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.0192182601817608
+-                               width: "2.80301px"
++                               height: 1.0192182601817608
+-                               height: "2.80301px"
++                               left: "87.88430157774786%"
+-                               left: "5.04221%"
++                               top: "43.365260876786635%"
+-                               top: "58.972%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.0387259103111037
+-                               width: "1.92294px"
++                               height: 2.0387259103111037
+-                               height: "1.92294px"
++                               left: "5.2685235900486465%"
+-                               left: "51.9643%"
++                               top: "80.02160456703687%"
+-                               top: "14.4927%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.3484054569716324
+-                               width: "1.17437px"
++                               height: 1.3484054569716324
+-                               height: "1.17437px"
++                               left: "6.9286086770404935%"
+-                               left: "17.415%"
++                               top: "18.733855053675708%"
+-                               top: "1.39502%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.435489132967806
+-                               width: "1.44508px"
++                               height: 2.435489132967806
+-                               height: "1.44508px"
++                               left: "50.88881334934183%"
+-                               left: "82.8782%"
++                               top: "15.866777880871208%"
+-                               top: "22.574%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.2208559754176904
+-                               width: "1.70406px"
++                               height: 2.2208559754176904
+-                               height: "1.70406px"
++                               left: "29.63905823785138%"
+-                               left: "48.4531%"
++                               top: "42.91068691768144%"
+-                               top: "37.5991%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.78793237422235
+-                               width: "2.94829px"
++                               height: 2.78793237422235
+-                               height: "2.94829px"
++                               left: "24.796985920799653%"
+-                               left: "62.5116%"
++                               top: "16.719739176783875%"
+-                               top: "41.3372%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.6439166673201158
+-                               width: "1.15367px"
++                               height: 1.6439166673201158
+-                               height: "1.15367px"
++                               left: "73.52088266898693%"
+-                               left: "25.0157%"
++                               top: "23.22525490703039%"
+-                               top: "82.9235%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.503016471523961
+-                               width: "2.89333px"
++                               height: 1.503016471523961
+-                               height: "2.89333px"
++                               left: "23.620785701311732%"
+-                               left: "44.7909%"
++                               top: "33.76775193835938%"
+-                               top: "78.6945%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.7043457767212764
+-                               width: "1.15603px"
++                               height: 1.7043457767212764
+-                               height: "1.15603px"
++                               left: "69.3521021975553%"
+-                               left: "52.3166%"
++                               top: "99.20226941409457%"
+-                               top: "14.1746%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.0138803182843206
+-                               width: "2.30159px"
++                               height: 2.0138803182843206
+-                               height: "2.30159px"
++                               left: "29.77888089098155%"
+-                               left: "12.1637%"
++                               top: "32.90368659581371%"
+-                               top: "50.5852%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.8738062375205087
+-                               width: "1.10699px"
++                               height: 1.8738062375205087
+-                               height: "1.10699px"
++                               left: "71.98392889961927%"
+-                               left: "25.8542%"
++                               top: "72.77988866300913%"
+-                               top: "24.2989%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.207159131064443
+-                               width: "2.22485px"
++                               height: 2.207159131064443
+-                               height: "2.22485px"
++                               left: "96.91290973448798%"
+-                               left: "71.8972%"
++                               top: "54.69274798183871%"
+-                               top: "12.796%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.6379689631147858
+-                               width: "1.40963px"
++                               height: 1.6379689631147858
+-                               height: "1.40963px"
++                               left: "90.07232011728654%"
+-                               left: "14.5725%"
++                               top: "31.400464757285064%"
+-                               top: "69.9923%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.693706517968166
+-                               width: "1.37563px"
++                               height: 2.693706517968166
+-                               height: "1.37563px"
++                               left: "64.98290997179559%"
+-                               left: "66.8694%"
++                               top: "65.054662603867%"
+-                               top: "78.6814%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.619573082282865
+-                               width: "2.83962px"
++                               height: 1.619573082282865
+-                               height: "2.83962px"
++                               left: "25.977992275869553%"
+-                               left: "77.8945%"
++                               top: "50.82233088234565%"
+-                               top: "97.7388%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.817274940844853
+-                               width: "1.44634px"
++                               height: 2.817274940844853
+-                               height: "1.44634px"
++                               left: "43.61531766285478%"
+-                               left: "75.0756%"
++                               top: "37.913108678726424%"
+-                               top: "97.3013%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.2265478371887284
+-                               width: "2.66269px"
++                               height: 1.2265478371887284
+-                               height: "2.66269px"
++                               left: "58.51822081905011%"
+-                               left: "17.5404%"
++                               top: "28.902460364857586%"
+-                               top: "50.0593%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                      ...
+                  ...
+                ...
+              ...
+      ...
+
+[log] [Fast Refresh] rebuilding
+[log] [Fast Refresh] done in 167ms
+[warning] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[log] [HMR] connected
+[error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>
+      <SegmentViewNode type="page" pagePath="page.tsx">
+        <SegmentTrieNode>
+        <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
+          <Home params={Promise} searchParams={Promise}>
+            <LoadingScreen>
+            <CustomCursor>
+            <ScrollProgress>
+            <div className="min-h-scre...">
+              <LoadableComponent>
+              <LoadableComponent>
+              <LoadableComponent>
+              <div className="relative z...">
+                <Navbar>
+                <main className="flex-1">
+                  <Hero>
+                  <About>
+                  <Skills>
+                    <section id="skills" className="relative p...">
+                      <SkillParticles>
+                        <div className="absolute i..." aria-hidden="true">
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.7040059821458993
+-                               width: "2.71586px"
++                               height: 1.7040059821458993
+-                               height: "2.71586px"
++                               left: "13.167234951089867%"
+-                               left: "65.914%"
++                               top: "69.66844212422316%"
+-                               top: "45.2182%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.1247204154728117
+-                               width: "2.16338px"
++                               height: 2.1247204154728117
+-                               height: "2.16338px"
++                               left: "55.70424754670702%"
+-                               left: "31.1776%"
++                               top: "16.06334309368309%"
+-                               top: "51.5741%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.844753869239765
+-                               width: "1.83672px"
++                               height: 2.844753869239765
+-                               height: "1.83672px"
++                               left: "58.45500518504076%"
+-                               left: "24.2052%"
++                               top: "24.781409395545484%"
+-                               top: "40.9262%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.5448873078420609
+-                               width: "2.06313px"
++                               height: 1.5448873078420609
+-                               height: "2.06313px"
++                               left: "69.4742980037389%"
+-                               left: "28.4306%"
++                               top: "47.7767418598558%"
+-                               top: "6.81042%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.7556577521322048
+-                               width: "2.15572px"
++                               height: 2.7556577521322048
+-                               height: "2.15572px"
++                               left: "94.40609242686935%"
+-                               left: "99.5561%"
++                               top: "65.61635634398061%"
+-                               top: "34.0942%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.75091502926316
+-                               width: "2.04704px"
++                               height: 1.75091502926316
+-                               height: "2.04704px"
++                               left: "21.15817789129435%"
+-                               left: "36.0541%"
++                               top: "81.0923891982109%"
+-                               top: "93.8267%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.2793114370932164
+-                               width: "1.2477px"
++                               height: 1.2793114370932164
+-                               height: "1.2477px"
++                               left: "54.20861403532904%"
+-                               left: "96.2118%"
++                               top: "57.1285566749727%"
+-                               top: "0.597629%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.0820120317655102
+-                               width: "2.87941px"
++                               height: 1.0820120317655102
+-                               height: "2.87941px"
++                               left: "92.52028573452439%"
+-                               left: "97.6677%"
++                               top: "93.01409428506881%"
+-                               top: "68.1152%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.9478511864488062
+-                               width: "2.37609px"
++                               height: 1.9478511864488062
+-                               height: "2.37609px"
++                               left: "41.159990866861285%"
+-                               left: "99.7142%"
++                               top: "22.39391605232526%"
+-                               top: "58.7434%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.9894106851941245
+-                               width: "2.45194px"
++                               height: 1.9894106851941245
+-                               height: "2.45194px"
++                               left: "76.35399024734481%"
+-                               left: "53.477%"
++                               top: "35.63074705797676%"
+-                               top: "49.858%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.4683945511388117
+-                               width: "2.65173px"
++                               height: 1.4683945511388117
+-                               height: "2.65173px"
++                               left: "95.82224145918316%"
+-                               left: "17.996%"
++                               top: "46.77499187819373%"
+-                               top: "71.3487%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.048016441290218
+-                               width: "1.34892px"
++                               height: 1.048016441290218
+-                               height: "1.34892px"
++                               left: "78.2765761471419%"
+-                               left: "54.5411%"
++                               top: "92.80309275898671%"
+-                               top: "62.7764%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.2419426406820546
+-                               width: "1.32331px"
++                               height: 1.2419426406820546
+-                               height: "1.32331px"
++                               left: "2.4133345136431394%"
+-                               left: "46.2549%"
++                               top: "94.17138852478003%"
+-                               top: "8.66293%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.9077928086232037
+-                               width: "2.78641px"
++                               height: 1.9077928086232037
+-                               height: "2.78641px"
++                               left: "7.02523157464523%"
+-                               left: "18.6453%"
++                               top: "66.61015758126331%"
+-                               top: "87.4613%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.4360703095128078
+-                               width: "2.33301px"
++                               height: 1.4360703095128078
+-                               height: "2.33301px"
++                               left: "42.48209223428188%"
+-                               left: "5.42453%"
++                               top: "83.06029337562325%"
+-                               top: "9.49942%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.9665658036997673
+-                               width: "2.55558px"
++                               height: 1.9665658036997673
+-                               height: "2.55558px"
++                               left: "99.91188378823814%"
+-                               left: "29.8092%"
++                               top: "26.851929073185755%"
+-                               top: "58.7035%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.2367918768629713
+-                               width: "1.10036px"
++                               height: 2.2367918768629713
+-                               height: "1.10036px"
++                               left: "18.36777125715149%"
+-                               left: "67.5036%"
++                               top: "12.921201844634178%"
+-                               top: "64.2616%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.7833886340275615
+-                               width: "2.44836px"
++                               height: 2.7833886340275615
+-                               height: "2.44836px"
++                               left: "64.32117969232962%"
+-                               left: "37.614%"
++                               top: "90.95384576257199%"
+-                               top: "12.9446%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.1361382189347395
+-                               width: "1.75346px"
++                               height: 2.1361382189347395
+-                               height: "1.75346px"
++                               left: "86.17494241065093%"
+-                               left: "7.58253%"
++                               top: "30.70013564143862%"
+-                               top: "48.9746%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.621732832670321
+-                               width: "2.19934px"
++                               height: 2.621732832670321
+-                               height: "2.19934px"
++                               left: "43.993946170353674%"
+-                               left: "15.3802%"
++                               top: "6.27244376348437%"
+-                               top: "13.963%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                      ...
+                  ...
+                ...
+              ...
+      ...
+
+[warning] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[log] [HMR] connected
+[error] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:<Fragment>, ...}} segmentPath={[...]} ...>
+      <SegmentViewNode type="page" pagePath="page.tsx">
+        <SegmentTrieNode>
+        <ClientPageRoot Component={function Home} serverProvidedParams={{...}}>
+          <Home params={Promise} searchParams={Promise}>
+            <LoadingScreen>
+            <CustomCursor>
+            <ScrollProgress>
+            <div className="min-h-scre...">
+              <LoadableComponent>
+              <LoadableComponent>
+              <LoadableComponent>
+              <div className="relative z...">
+                <Navbar>
+                <main className="flex-1">
+                  <Hero>
+                  <About>
+                  <Skills>
+                    <section id="skills" className="relative p...">
+                      <SkillParticles>
+                        <div className="absolute i..." aria-hidden="true">
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.6444332853341777
+-                               width: "2.38557px"
++                               height: 1.6444332853341777
+-                               height: "2.38557px"
++                               left: "59.85337983146509%"
+-                               left: "32.6355%"
++                               top: "58.90839407681353%"
+-                               top: "99.4676%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.2248275156856674
+-                               width: "2.83073px"
++                               height: 1.2248275156856674
+-                               height: "2.83073px"
++                               left: "16.414065754195462%"
+-                               left: "51.692%"
++                               top: "65.86481608337186%"
+-                               top: "6.46212%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.595091576920699
+-                               width: "2.89871px"
++                               height: 1.595091576920699
+-                               height: "2.89871px"
++                               left: "59.58031531910402%"
+-                               left: "29.8827%"
++                               top: "97.4767749907839%"
+-                               top: "37.1638%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.4825562719951104
+-                               width: "2.93896px"
++                               height: 1.4825562719951104
+-                               height: "2.93896px"
++                               left: "17.778611074989637%"
+-                               left: "19.6709%"
++                               top: "42.832524767708925%"
+-                               top: "37.2008%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.7334279747103494
+-                               width: "2.44622px"
++                               height: 1.7334279747103494
+-                               height: "2.44622px"
++                               left: "17.099476325082197%"
+-                               left: "89.4966%"
++                               top: "51.41727636977327%"
+-                               top: "28.167%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.043668816616176
+-                               width: "1.788px"
++                               height: 2.043668816616176
+-                               height: "1.788px"
++                               left: "20.988534225746214%"
+-                               left: "52.9814%"
++                               top: "53.02459692803338%"
+-                               top: "68.2274%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.2802174259846995
+-                               width: "2.3297px"
++                               height: 2.2802174259846995
+-                               height: "2.3297px"
++                               left: "83.64405993613829%"
+-                               left: "51.1045%"
++                               top: "90.58057107722301%"
+-                               top: "2.03279%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.6299772085078517
+-                               width: "1.76579px"
++                               height: 2.6299772085078517
+-                               height: "1.76579px"
++                               left: "33.03298674025426%"
+-                               left: "56.1676%"
++                               top: "34.62935005964223%"
+-                               top: "23.8762%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.7581029655066815
+-                               width: "1.00162px"
++                               height: 1.7581029655066815
+-                               height: "1.00162px"
++                               left: "19.44658914691836%"
+-                               left: "79.6467%"
++                               top: "29.992604338083883%"
+-                               top: "72.6719%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.420172900542693
+-                               width: "2.93737px"
++                               height: 1.420172900542693
+-                               height: "2.93737px"
++                               left: "79.37798265506608%"
+-                               left: "36.2248%"
++                               top: "93.50094004466239%"
+-                               top: "6.53081%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.6492948198460686
+-                               width: "1.17041px"
++                               height: 2.6492948198460686
+-                               height: "1.17041px"
++                               left: "19.417720510009907%"
+-                               left: "77.2635%"
++                               top: "81.64886207367083%"
+-                               top: "86.0522%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.6092251132865067
+-                               width: "1.50386px"
++                               height: 1.6092251132865067
+-                               height: "1.50386px"
++                               left: "30.38614325165173%"
+-                               left: "14.8396%"
++                               top: "16.4511373696731%"
+-                               top: "6.81549%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.667579929556874
+-                               width: "1.42229px"
++                               height: 1.667579929556874
+-                               height: "1.42229px"
++                               left: "3.048553597770798%"
+-                               left: "89.5425%"
++                               top: "66.8873851419692%"
+-                               top: "48.3225%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.1410416069788458
+-                               width: "1.59784px"
++                               height: 1.1410416069788458
+-                               height: "1.59784px"
++                               left: "41.23641173497121%"
+-                               left: "63.8558%"
++                               top: "43.196003236137905%"
+-                               top: "52.6468%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.2813109444889415
+-                               width: "1.8433px"
++                               height: 1.2813109444889415
+-                               height: "1.8433px"
++                               left: "65.51898667219425%"
+-                               left: "42.8984%"
++                               top: "75.24028269411873%"
+-                               top: "46.0599%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.3559403831230312
+-                               width: "1.30054px"
++                               height: 1.3559403831230312
+-                               height: "1.30054px"
++                               left: "15.228031813993393%"
+-                               left: "55.8921%"
++                               top: "42.805960019400594%"
+-                               top: "95.7673%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 1.4488522253476936
+-                               width: "2.19378px"
++                               height: 1.4488522253476936
+-                               height: "2.19378px"
++                               left: "22.735667976395803%"
+-                               left: "26.847%"
++                               top: "51.40639646655355%"
+-                               top: "37.9472%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.4025990610379777
+-                               width: "1.99616px"
++                               height: 2.4025990610379777
+-                               height: "1.99616px"
++                               left: "78.40066476955931%"
+-                               left: "97.5417%"
++                               top: "96.34308660414982%"
+-                               top: "75.7364%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.0611470548756117
+-                               width: "1.23665px"
++                               height: 2.0611470548756117
+-                               height: "1.23665px"
++                               left: "69.63216298286798%"
+-                               left: "31.5608%"
++                               top: "67.2424762989273%"
+-                               top: "49.4619%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                          <motion.div className="absolute r..." style={{...}} animate={{y:[...], ...}} transition={{...}}>
+                            <div
+                              className="absolute rounded-full"
+                              style={{
++                               width: 2.0907693945058643
+-                               width: "1.5807px"
++                               height: 2.0907693945058643
+-                               height: "1.5807px"
++                               left: "3.733773663104034%"
+-                               left: "53.4144%"
++                               top: "89.9647696082707%"
+-                               top: "98.9383%"
++                               background: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-image: "radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent)"
+-                               background-position-x: "initial"
+-                               background-position-y: "initial"
+-                               background-size: "initial"
+-                               background-repeat: "initial"
+-                               background-attachment: "initial"
+-                               background-origin: "initial"
+-                               background-clip: "initial"
+-                               background-color: "initial"
+                              }}
+                              ref={function useMotionRef.useCallback}
+                            >
+                      ...
+                  ...
+                ...
+              ...
+      ...
+
+[warning] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
