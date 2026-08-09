@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Download, ArrowRight } from 'lucide-react';
+import GlitchText from './GlitchText';
 
 function TypewriterText({ texts, speed = 80, deleteSpeed = 40, pause = 2000 }: {
   texts: string[];
@@ -102,6 +103,88 @@ function MatrixRain() {
   return <canvas ref={canvasRef} className="absolute inset-0 z-[1] opacity-30 pointer-events-none" />;
 }
 
+function AnimatedCounter({ target, suffix = '', duration = 2 }: { target: number; suffix?: string; duration?: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [inView, setInView] = useState(false);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setInView(true); },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView) return;
+    const start = Date.now();
+    const tick = () => {
+      const progress = Math.min((Date.now() - start) / (duration * 1000), 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [inView, target, duration]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
+
+const heroStats = [
+  { value: 2, suffix: '+', label: 'Years Exp' },
+  { value: 10, suffix: '+', label: 'Projects' },
+  { value: 5, suffix: '+', label: 'AI Models' },
+];
+
+function StaggeredLetter({ text, baseDelay = 0 }: { text: string; baseDelay?: number }) {
+  return (
+    <>
+      {text.split('').map((char, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 20, rotateX: -90 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          transition={{
+            duration: 0.4,
+            delay: baseDelay + i * 0.04,
+            type: 'spring',
+            stiffness: 200,
+            damping: 15,
+          }}
+          className="inline-block"
+          style={{ transformOrigin: 'bottom' }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </>
+  );
+}
+
+function OrbitalBadge({ children, index }: { children: React.ReactNode; index: number }) {
+  return (
+    <motion.span
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 1.3 + index * 0.1, type: 'spring', stiffness: 200 }}
+      className="relative inline-flex items-center justify-center px-3 py-1.5 text-xs font-mono text-slate-400 border border-white/5 rounded-lg bg-white/[0.02] cursor-default"
+      whileHover={{
+        scale: 1.15,
+        borderColor: 'rgba(0, 240, 255, 0.3)',
+        color: '#00f0ff',
+        y: -4,
+        transition: { duration: 0.2 },
+      }}
+    >
+      {children}
+    </motion.span>
+  );
+}
+
 export default function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -129,19 +212,37 @@ export default function Hero() {
       {/* Animated grid */}
       <div className="absolute inset-0 z-[2] grid-bg opacity-40" />
 
+      {/* 3D Spinning wireframe cube behind text */}
+      <div className="absolute inset-0 z-[3] flex items-center justify-center pointer-events-none">
+        <div
+          className="hero-wireframe-cube"
+          style={{ transform: `translate(${mousePos.x * -0.2}px, ${mousePos.y * -0.2}px)` }}
+          aria-hidden="true"
+        >
+          <div className="face" />
+          <div className="face" />
+          <div className="face" />
+          <div className="face" />
+          <div className="face" />
+          <div className="face" />
+        </div>
+      </div>
+
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
-        {/* Status badge */}
+        {/* Status badge with pulsing ring */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00f0ff]/20 bg-[#00f0ff]/5 mb-8"
+          className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00f0ff]/20 bg-[#00f0ff]/5 mb-8"
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-sm text-slate-300 font-mono">Available for opportunities</span>
+          <span className="absolute inset-0 rounded-full border border-[#00f0ff]/10 hero-pulse-ring" aria-hidden="true" />
+          <span className="absolute inset-0 rounded-full border border-[#00f0ff]/5 hero-pulse-ring-delayed" aria-hidden="true" />
+          <span className="relative w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="relative text-sm text-slate-300 font-mono">Available for opportunities</span>
         </motion.div>
 
-        {/* Name */}
+        {/* Name with staggered letter animation + GlitchText */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -149,8 +250,11 @@ export default function Hero() {
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4"
           style={{ transform: `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.5}px)` }}
         >
-          <span className="text-white">Hi, I&apos;m </span>
-          <span className="gradient-text">Adarsh</span>
+          <span className="text-white">
+            <StaggeredLetter text="Hi, I'm " baseDelay={0.3} />
+          </span>
+          <br className="sm:hidden" />
+          <GlitchText text="Adarsh" className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold gradient-text" />
         </motion.h1>
 
         {/* Typewriter Role */}
@@ -176,7 +280,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto mb-6 leading-relaxed"
         >
           Crafting intelligent systems at the intersection of{' '}
           <span className="text-[#00f0ff]">Artificial Intelligence</span>,{' '}
@@ -184,17 +288,35 @@ export default function Hero() {
           <span className="text-[#f59e0b]">Scalable Engineering</span>.
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* Animated counters row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.85 }}
+          className="flex flex-wrap justify-center gap-6 sm:gap-10 mb-10"
+        >
+          {heroStats.map((stat) => (
+            <div key={stat.label} className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold gradient-text tabular-nums">
+                <AnimatedCounter target={stat.value} suffix={stat.suffix} duration={2} />
+              </div>
+              <p className="text-xs text-slate-500 font-mono mt-1">{stat.label}</p>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* CTA Buttons with holographic shimmer */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
- <a
+          <a
             href="#contact"
             className="group relative px-8 py-3.5 rounded-xl font-semibold text-[#030014] bg-gradient-to-r from-[#00f0ff] to-[#06b6d4] overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.4)]"
           >
+            <span className="absolute inset-0 hero-holographic-shimmer" aria-hidden="true" />
             <span className="relative z-10 flex items-center gap-2">
               Get In Touch
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -211,7 +333,7 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* Tech stack floating badges */}
+        {/* Tech stack floating badges with orbital hover effect */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -220,15 +342,9 @@ export default function Hero() {
         >
           {['Python', 'FastAPI', 'LangChain', 'PyTorch', 'RAG', 'LLMs', 'MongoDB', 'Docker'].map(
             (tech, i) => (
-              <motion.span
-                key={tech}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.3 + i * 0.1, type: 'spring', stiffness: 200 }}
-                className="px-3 py-1.5 text-xs font-mono text-slate-400 border border-white/5 rounded-lg bg-white/[0.02] hover:border-[#00f0ff]/30 hover:text-[#00f0ff] transition-colors cursor-default"
-              >
+              <OrbitalBadge key={tech} index={i}>
                 {tech}
-              </motion.span>
+              </OrbitalBadge>
             )
           )}
         </motion.div>
@@ -250,6 +366,55 @@ export default function Hero() {
           <ChevronDown size={20} />
         </motion.div>
       </motion.div>
+
+      {/* Inject keyframes for hero-specific animations */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes hero-spin-cube {
+          0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+          100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(180deg); }
+        }
+        @keyframes hero-pulse-ring-anim {
+          0%, 100% { transform: scale(1); opacity: 0.5; }
+          50% { transform: scale(1.5); opacity: 0; }
+        }
+        @keyframes hero-holographic-anim {
+          0% { transform: translateX(-100%); }
+          40% { transform: translateX(100%); }
+          100% { transform: translateX(100%); }
+        }
+        .hero-wireframe-cube {
+          width: 200px;
+          height: 200px;
+          position: relative;
+          animation: hero-spin-cube 20s linear infinite;
+          transform-style: preserve-3d;
+          opacity: 0.12;
+        }
+        .hero-wireframe-cube .face {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border: 1px solid #00f0ff;
+          border-radius: 8px;
+          box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.05);
+        }
+        .hero-wireframe-cube .face:nth-child(1) { transform: translateZ(100px); border-color: #00f0ff; }
+        .hero-wireframe-cube .face:nth-child(2) { transform: rotateY(180deg) translateZ(100px); border-color: #8b5cf6; }
+        .hero-wireframe-cube .face:nth-child(3) { transform: rotateY(90deg) translateZ(100px); border-color: #f59e0b; }
+        .hero-wireframe-cube .face:nth-child(4) { transform: rotateY(-90deg) translateZ(100px); border-color: #10b981; }
+        .hero-wireframe-cube .face:nth-child(5) { transform: rotateX(90deg) translateZ(100px); border-color: #f43f5e; }
+        .hero-wireframe-cube .face:nth-child(6) { transform: rotateX(-90deg) translateZ(100px); border-color: #00f0ff; }
+        .hero-pulse-ring {
+          animation: hero-pulse-ring-anim 2s ease-in-out infinite;
+        }
+        .hero-pulse-ring-delayed {
+          animation: hero-pulse-ring-anim 2s ease-in-out infinite 0.5s;
+        }
+        .hero-holographic-shimmer {
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+          animation: hero-holographic-anim 3s ease-in-out infinite;
+        }
+      ` }} />
     </section>
   );
 }
