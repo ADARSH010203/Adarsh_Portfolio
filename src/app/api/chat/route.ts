@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
     const zai = await ZAI.create();
 
     const messages: { role: string; content: string }[] = [
-      { role: 'assistant', content: SYSTEM_PROMPT },
+      { role: 'system', content: SYSTEM_PROMPT },
     ];
 
     // Add recent history for context

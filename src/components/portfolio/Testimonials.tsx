@@ -71,7 +71,7 @@ function AchievementCard({ achievement, index }: { achievement: Achievement; ind
       transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
       className="relative group"
     >
-      <div className="glass-card rounded-2xl p-6 h-full transition-all duration-300 hover:bg-white/[0.06] hover:border-white/15">
+      <div className="glass-card rounded-2xl p-6 h-full transition-all duration-300 hover:bg-white/[0.06] hover:border-white/10">
         {/* Icon background glow */}
         <div
           className="absolute -top-6 -right-6 w-24 h-24 rounded-full blur-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"

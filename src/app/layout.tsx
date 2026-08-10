@@ -48,11 +48,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground noise-overlay`}
       >
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var o=new MutationObserver(function(m){m.forEach(function(mu){if(mu.type==='childList'){mu.addedNodes.forEach(function(n){if(n.nodeType===1&&n.getAttribute&&n.getAttribute('fdprocessedid')){n.removeAttribute('fdprocessedid')}})};}if(mu.type==='attributes'&&mu.attributeName==='fdprocessedid'){mu.target.removeAttribute('fdprocessedid')}})});o.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['fdprocessedid']});var _e=console.error;console.error=function(){var m=arguments[0]&&arguments[0].toString?arguments[0].toString():'';if(m.indexOf('hydrated but some attributes')!==-1&&m.indexOf('fdprocessedid')!==-1)return;_e.apply(console,arguments)};})();`,
-          }}
-        />
         {children}
         <Toaster />
       </body>

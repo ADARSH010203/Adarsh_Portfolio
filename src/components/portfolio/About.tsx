@@ -5,32 +5,12 @@ import { motion, useInView } from 'framer-motion';
 import { Bot, Brain, Cpu, Zap, Globe, Shield } from 'lucide-react';
 import TiltCard from './TiltCard';
 
-function Counter({ target, suffix = '', duration = 2 }: { target: number; suffix?: string; duration?: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
-
-  return (
-    <motion.span
-      ref={ref}
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : {}}
-      className="text-3xl sm:text-4xl font-bold gradient-text tabular-nums"
-    >
-      {inView ? (
-        <CountUp target={target} suffix={suffix} duration={duration} />
-      ) : (
-        '0'
-      )}
-    </motion.span>
-  );
-}
-
-function CountUp({ target, suffix, duration }: { target: number; suffix: string; duration: number }) {
+function useCountUp(target: number, suffix: string, duration: number, enabled: boolean) {
   const ref = useRef<HTMLSpanElement>(null);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (hasAnimated.current || !ref.current) return;
+    if (!enabled || hasAnimated.current || !ref.current) return;
     hasAnimated.current = true;
     const start = Date.now();
     function tick() {
@@ -41,9 +21,24 @@ function CountUp({ target, suffix, duration }: { target: number; suffix: string;
       if (progress < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
-  }, [target, suffix, duration]);
+  }, [enabled, target, suffix, duration]);
 
-  return <span ref={ref}>0</span>;
+  return ref;
+}
+
+function Counter({ target, suffix = '', duration = 2, inView }: { target: number; suffix?: string; duration?: number; inView: boolean }) {
+  const countRef = useCountUp(target, suffix, duration, inView);
+
+  return (
+    <motion.span
+      ref={countRef}
+      initial={{ opacity: 0 }}
+      animate={inView ? { opacity: 1 } : {}}
+      className="text-3xl sm:text-4xl font-bold gradient-text tabular-nums"
+    >
+      0{suffix}
+    </motion.span>
+  );
 }
 
 function TypingText({ text, delay = 0, speed = 15 }: { text: string; delay?: number; speed?: number }) {
@@ -211,7 +206,7 @@ export default function About() {
                       style={{ color: item.color }}
                     />
                   </motion.div>
-                  <Counter target={item.target} suffix={item.suffix} />
+                  <Counter target={item.target} suffix={item.suffix} inView={inView} />
                   <p className="text-sm text-slate-500 mt-1">{item.label}</p>
                 </motion.div>
               ))}

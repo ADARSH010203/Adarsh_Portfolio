@@ -194,86 +194,153 @@ class Orchestrator:
   },
 ];
 
-/* ---------- Simple regex-based syntax highlighting ---------- */
+/* ---------- Token-based syntax highlighting ---------- */
 
-function highlightPython(code: string): string {
-  const lines = code.split('\n');
-  return lines
-    .map((line) => {
-      let highlighted = escapeHtml(line);
+// Tokenize a line into segments: [{ type, text }]
+function tokenizeLine(line: string): { type: string; text: string }[] {
+  const tokens: { type: string; text: string }[] = [];
+  let i = 0;
 
-      // Comments (# ...) — must come first
-      highlighted = highlighted.replace(
-        /(\s*)(#.*)$/,
-        '$1<span class="text-slate-500 italic">$2</span>'
-      );
+  while (i < line.length) {
+    // Whitespace
+    if (line[i] === ' ' || line[i] === '\t') {
+      let start = i;
+      while (i < line.length && (line[i] === ' ' || line[i] === '\t')) i++;
+      tokens.push({ type: 'plain', text: line.slice(start, i) });
+      continue;
+    }
 
-      // Triple-quoted strings
-      highlighted = highlighted.replace(
-        /(&quot;&quot;&quot;)(.*?)(&quot;&quot;&quot;)/g,
-        '<span class="text-emerald-400">$1$2$3</span>'
-      );
+    // Comment (# to end of line) — only at start or after whitespace
+    if (line[i] === '#' && (tokens.length === 0 || tokens[tokens.length - 1].type === 'plain')) {
+      tokens.push({ type: 'comment', text: line.slice(i) });
+      break;
+    }
 
-      // Decorators
-      highlighted = highlighted.replace(
-        /(@\w+)/g,
-        '<span class="text-amber-400">$1</span>'
-      );
+    // Triple-quoted string
+    if (line.slice(i, i + 3) === '"""') {
+      let end = line.indexOf('"""', i + 3);
+      if (end === -1) end = line.length - 3;
+      tokens.push({ type: 'string', text: line.slice(i, end + 3) });
+      i = end + 3;
+      continue;
+    }
 
-      // Strings (single & double quoted, after decorators)
-      highlighted = highlighted.replace(
-        /((?:&quot;)(?:(?!&quot;).)*?(?:&quot;)|(?:(?!\').)*?(?:\'))/g,
-        (match) => `<span class="text-emerald-400">${match}</span>`
-      );
+    // f-string or regular string (double-quoted)
+    if (line[i] === '"' || line.slice(i, i + 2) === 'f"') {
+      const isF = line[i] === 'f';
+      const startQuote = i + (isF ? 1 : 0);
+      let j = startQuote + 1;
+      while (j < line.length && line[j] !== '"') {
+        if (line[j] === '\\') j++; // skip escaped char
+        j++;
+      }
+      tokens.push({ type: 'string', text: line.slice(i, j + 1) });
+      i = j + 1;
+      continue;
+    }
 
-      // Keywords
-      const keywords = [
+    // Single-quoted string
+    if (line[i] === "'" || line.slice(i, i + 2) === "f'") {
+      const isF = line[i] === 'f';
+      const startQuote = i + (isF ? 1 : 0);
+      let j = startQuote + 1;
+      while (j < line.length && line[j] !== "'") {
+        if (line[j] === '\\') j++;
+        j++;
+      }
+      tokens.push({ type: 'string', text: line.slice(i, j + 1) });
+      i = j + 1;
+      continue;
+    }
+
+    // Decorator
+    if (line[i] === '@' && (i === 0 || line[i - 1] === ' ' || line[i - 1] === '\t')) {
+      let j = i + 1;
+      while (j < line.length && /[\w.]/.test(line[j])) j++;
+      tokens.push({ type: 'decorator', text: line.slice(i, j) });
+      i = j;
+      continue;
+    }
+
+    // Number
+    if (/[\d]/.test(line[i]) && (i === 0 || !/[\w]/.test(line[i - 1]))) {
+      let j = i;
+      while (j < line.length && /[\d.]/.test(line[j])) j++;
+      tokens.push({ type: 'number', text: line.slice(i, j) });
+      i = j;
+      continue;
+    }
+
+    // Word (identifier / keyword / builtin)
+    if (/[\w]/.test(line[i])) {
+      let j = i;
+      while (j < line.length && /[\w]/.test(line[j])) j++;
+      const word = line.slice(i, j);
+
+      const keywords = new Set([
         'from', 'import', 'class', 'def', 'async', 'await', 'return',
         'if', 'else', 'elif', 'for', 'while', 'in', 'not', 'and', 'or',
         'with', 'as', 'try', 'except', 'raise', 'yield', 'lambda',
         'True', 'False', 'None', 'self', 'pass', 'break', 'continue',
         'is', 'del', 'global', 'nonlocal', 'assert',
-      ];
-      const kwRegex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'g');
-      highlighted = highlighted.replace(
-        kwRegex,
-        '<span class="text-purple-400">$1</span>'
-      );
+      ]);
 
-      // Built-in functions / types
-      const builtins = [
+      const builtins = new Set([
         'print', 'len', 'range', 'str', 'int', 'float', 'list', 'dict',
         'set', 'tuple', 'type', 'isinstance', 'hasattr', 'getattr',
         'next', 'enumerate', 'zip', 'map', 'filter', 'sorted', 'super',
-      ];
-      const biRegex = new RegExp(`\\b(${builtins.join('|')})\\b`, 'g');
-      highlighted = highlighted.replace(
-        biRegex,
-        '<span class="text-cyan-300">$1</span>'
-      );
+      ]);
 
-      // Numbers
-      highlighted = highlighted.replace(
-        /\b(\d+\.?\d*)\b/g,
-        '<span class="text-amber-300">$1</span>'
-      );
+      if (word === 'def' || word === 'class') {
+        // Consume the name after def/class
+        tokens.push({ type: 'keyword', text: word });
+        let k = j;
+        while (k < line.length && line[k] === ' ') k++;
+        let nameStart = k;
+        while (k < line.length && /[\w]/.test(line[k])) k++;
+        if (k > nameStart) {
+          tokens.push({ type: 'plain', text: line.slice(j, nameStart) });
+          tokens.push({ type: 'function', text: line.slice(nameStart, k) });
+        } else {
+          tokens.push({ type: 'plain', text: line.slice(j, k) });
+        }
+        i = k;
+      } else if (keywords.has(word)) {
+        tokens.push({ type: 'keyword', text: word });
+        i = j;
+      } else if (builtins.has(word)) {
+        tokens.push({ type: 'builtin', text: word });
+        i = j;
+      } else if (/^[A-Z]/.test(word) && word.length > 1) {
+        // Type-like identifiers (e.g. AgentRequest, BaseModel)
+        tokens.push({ type: 'type', text: word });
+        i = j;
+      } else {
+        tokens.push({ type: 'plain', text: word });
+        i = j;
+      }
+      continue;
+    }
 
-      // Function / class definitions
-      highlighted = highlighted.replace(
-        /\b(def|class)\s+(\w+)/g,
-        '<span class="text-purple-400">$1</span> <span class="text-cyan-400 font-semibold">$2</span>'
-      );
+    // Punctuation / operators
+    tokens.push({ type: 'plain', text: line[i] });
+    i++;
+  }
 
-      // Type hints after colon
-      highlighted = highlighted.replace(
-        /:\s*([A-Z]\w+)/g,
-        ': <span class="text-emerald-300">$1</span>'
-      );
-
-      return highlighted;
-    })
-    .join('\n');
+  return tokens;
 }
+
+const TOKEN_COLORS: Record<string, string> = {
+  comment: 'text-slate-500 italic',
+  string: 'text-emerald-400',
+  keyword: 'text-purple-400',
+  builtin: 'text-cyan-300',
+  number: 'text-amber-300',
+  decorator: 'text-amber-400',
+  function: 'text-cyan-400 font-semibold',
+  type: 'text-emerald-300',
+  plain: '',
+};
 
 function escapeHtml(str: string): string {
   return str
@@ -281,6 +348,23 @@ function escapeHtml(str: string): string {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+function highlightPython(code: string): string {
+  return code
+    .split('\n')
+    .map((line) => {
+      const tokens = tokenizeLine(line);
+      return tokens
+        .map((token) => {
+          const escaped = escapeHtml(token.text);
+          const colorClass = TOKEN_COLORS[token.type];
+          if (!colorClass) return escaped;
+          return `<span class="${colorClass}">${escaped}</span>`;
+        })
+        .join('');
+    })
+    .join('\n');
 }
 
 /* ---------- Component ---------- */
@@ -359,7 +443,7 @@ export default function CodeShowcase() {
           transition={{ duration: 0.5, delay: 0.25 }}
           className="glass-card rounded-2xl overflow-hidden neon-border"
         >
- {/* Header bar */}
+          {/* Header bar */}
           <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/5 bg-white/[0.02]">
             <div className="flex items-center gap-3">
               <div className="flex gap-1.5">
