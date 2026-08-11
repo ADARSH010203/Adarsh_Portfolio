@@ -29,7 +29,7 @@ const experiences = [
     color: '#8b5cf6',
     icon: Users,
     yearsOfExp: 2,
-    techStack: ['REST APIs', 'Microservices', 'JWT Auth', 'Docker', 'CI/CD'],
+    techStack: ['LLM', 'MLops', 'Python', 'Docker', 'Langchain','AI AGENT'],
     highlights: [
       'Conducted technical workshops on building production-ready backend systems, API development, and database architecture for 100+ students.',
       'Led hands-on sessions covering REST API design, authentication strategies, microservices patterns, query optimization, and deployment best practices.',

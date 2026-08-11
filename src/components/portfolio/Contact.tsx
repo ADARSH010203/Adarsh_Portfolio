@@ -96,8 +96,8 @@ export default function Contact() {
   const socials = [
     { icon: Mail, label: 'Email', value: 'adarshkumarsbrhs@gmail.com', href: 'mailto:adarshkumarsbrhs@gmail.com', color: '#00f0ff' },
     { icon: Phone, label: 'Phone', value: '+91 9801742363', href: 'tel:+919801742363', color: '#8b5cf6' },
-    { icon: Linkedin, label: 'LinkedIn', value: 'LinkedIn Profile', href: '#', color: '#0a66c2' },
-    { icon: Github, label: 'GitHub', value: 'GitHub Profile', href: '#', color: '#ffffff' },
+    { icon: Linkedin, label: 'LinkedIn', value: 'LinkedIn Profile', href: 'https://www.linkedin.com/in/adarshsingh98/', color: '#0a66c2' },
+    { icon: Github, label: 'GitHub', value: 'GitHub Profile', href: 'https://github.com/ADARSH010203', color: '#ffffff' },
   ];
 
   const inputClasses = (fieldName: string) =>

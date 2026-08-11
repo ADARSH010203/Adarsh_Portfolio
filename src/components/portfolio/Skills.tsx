@@ -15,20 +15,20 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'Languages',
     color: '#00f0ff',
-    skills: ['Python', 'Java', 'TypeScript', 'SQL'],
+    skills: ['Python', 'Java', 'TypeScript', 'SQL','Dart'],
     percentages: [95, 65, 75, 80],
   },
   {
     title: 'AI / ML & GenAI',
     color: '#8b5cf6',
-    skills: ['Machine Learning', 'Deep Learning', 'Generative AI', 'Agentic AI', 'NLP', 'RAG', 'LLMs', 'Prompt Engineering'],
-    percentages: [88, 82, 92, 90, 85, 95, 93, 88],
+    skills: ['Machine Learning', 'Deep Learning', 'Generative AI', 'Agentic AI', 'NLP', 'RAG', 'LLMs', 'Prompt Engineering','Agent RAG','GraphRag'],
+    percentages: [88, 82, 92, 90, 85, 95, 93, 88,70,60],
   },
   {
     title: 'Frameworks',
     color: '#f59e0b',
-    skills: ['FastAPI', 'Hugging Face', 'PyTorch', 'Scikit-learn', 'Pandas', 'NumPy', 'LangChain', 'LangGraph', 'MCP', 'A2A', 'ChromaDB', 'CrewAI', 'Phidata'],
-    percentages: [92, 88, 85, 82, 90, 88, 95, 88, 80, 78, 85, 82, 80],
+    skills: ['FastAPI', 'Hugging Face', 'PyTorch', 'Scikit-learn', 'Pandas','Seaborn', 'NumPy', 'LangChain', 'LangGraph', 'MCP', 'A2A', 'ChromaDB', 'CrewAI', 'Phidata'],
+    percentages: [92, 88, 85, 82, 90, 88, 95, 88, 80,80, 78, 85, 82, 80],
   },
   {
     title: 'Databases & Tools',

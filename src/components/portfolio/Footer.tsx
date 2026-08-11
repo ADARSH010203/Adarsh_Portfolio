@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, ArrowUp, Github, Linkedin, Mail, Phone } from 'lucide-react';
+import { motion, AnimatePresence, color } from 'framer-motion';
+import { Heart, ArrowUp, Github, Linkedin, Mail, Phone, Icon, Instagram } from 'lucide-react';
 
 const socialIcons = [
-  { icon: Github, href: '#', color: '#ffffff', label: 'GitHub' },
-  { icon: Linkedin, href: '#', color: '#0a66c2', label: 'LinkedIn' },
+  { icon: Github, href: 'https://github.com/ADARSH010203', color: '#ffffff', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/adarshsingh98/', color: '#0a66c2', label: 'LinkedIn' },
+  {icon: Instagram, href:'', color:'0a56c2', label:'Instagram'},
   { icon: Mail, href: 'mailto:adarshkumarsbrhs@gmail.com', color: '#00f0ff', label: 'Email' },
   { icon: Phone, href: 'tel:+919801742363', color: '#8b5cf6', label: 'Phone' },
 ];

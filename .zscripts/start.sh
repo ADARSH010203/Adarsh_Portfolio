@@ -66,9 +66,9 @@ if [ -d "/app/python-runtime/site-packages" ]; then
     echo "🐍 已启用部署包内 Python runtime: $(python --version 2>&1)"
 fi
 
-# 启动 Next.js 服务器
+#  Next.js 
 if [ -f "./next-service-dist/server.js" ]; then
-    echo "🚀 启动 Next.js 服务器..."
+    echo "🚀  Next.js ..."
     cd next-service-dist/ || exit 1
     
     # 设置环境变量

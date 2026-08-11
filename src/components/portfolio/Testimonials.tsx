@@ -25,14 +25,14 @@ const achievements: Achievement[] = [
     icon: Users,
     title: 'Workshop Students',
     value: '100+',
-    description: 'Technical workshops conducted as NEURON Club Treasurer',
+    description: 'Technical workshops conducted as NEURON Club Treasurer and Basketball Cordinator',
     color: '#8b5cf6',
   },
   {
     icon: Code,
     title: 'Tech Stack',
     value: '20+',
-    description: 'Technologies mastered across AI, backend, and frontend',
+    description: 'Technologies mastered across AI, backend, data and App',
     color: '#f59e0b',
   },
   {
@@ -53,7 +53,7 @@ const achievements: Achievement[] = [
     icon: Globe,
     title: 'Languages',
     value: '3',
-    description: 'English, Hindi, Gujarati — enabling global collaboration',
+    description: 'English, Hindi, Bhojpuri — enabling global collaboration',
     color: '#06b6d4',
   },
 ];
