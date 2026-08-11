@@ -14,8 +14,8 @@ const BG_COLOR = '#030014';
 const CYAN = new THREE.Color('#00f0ff');
 const PURPLE = new THREE.Color('#8b5cf6');
 const AMBER = new THREE.Color('#f59e0b');
-const WHITE = new THREE.Color('#ffffff');
-const PALETTE = [CYAN, PURPLE, AMBER, WHITE];
+const TEAL = new THREE.Color('#0d9488');
+const PALETTE = [CYAN, PURPLE, AMBER, TEAL];
 
 /* ============================================================
    CUSTOM VERTEX/FRAGMENT SHADERS for the particle nebula
@@ -60,9 +60,9 @@ const fragmentShader = /* glsl */ `
     float strength = 1.0 - (dist * 2.0);
     strength = pow(strength, 1.8);
 
-    // Core brightness
+    // Core brightness (subtle, no white blowout)
     float core = 1.0 - smoothstep(0.0, 0.15, dist);
-    vec3 finalColor = mix(vColor, vec3(1.0), core * 0.6);
+    vec3 finalColor = mix(vColor, vec3(1.0), core * 0.15);
 
     gl_FragColor = vec4(finalColor, strength * vAlpha);
   }
@@ -178,8 +178,8 @@ const ParticleNebula = React.memo(function ParticleNebula() {
       const distFromCenter = radius / 5;
       siz[i] = (Math.random() * 3 + 1) * (1 - distFromCenter * 0.5);
 
-      // Alpha
-      alp[i] = Math.random() * 0.5 + 0.25 + (1 - distFromCenter) * 0.2;
+      // Alpha — toned down so particles don't overpower content
+      alp[i] = Math.random() * 0.25 + 0.08 + (1 - distFromCenter) * 0.08;
     }
 
     return { positions: pos, colors: col, sizes: siz, alphas: alp };
@@ -472,8 +472,8 @@ export default function ParticleField() {
             <SceneContent />
             <EffectComposer>
               <Bloom
-                intensity={1.2}
-                luminanceThreshold={0.1}
+                intensity={0.4}
+                luminanceThreshold={0.4}
                 luminanceSmoothing={0.9}
                 mipmapBlur
               />

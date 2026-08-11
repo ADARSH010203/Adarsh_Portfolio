@@ -19,7 +19,7 @@ interface Star {
   color: string;
 }
 
-const STAR_COLORS = ['#00f0ff', '#8b5cf6', '#ffffff', '#a78bfa', '#06b6d4'];
+const STAR_COLORS = ['#00f0ff', '#8b5cf6', '#a78bfa', '#06b6d4', '#0d9488'];
 const STAR_COUNT = 8;
 
 function generateStar(id: number): Star {
@@ -31,7 +31,7 @@ function generateStar(id: number): Star {
     duration: 1.2 + Math.random() * 2.5,
     delay: Math.random() * 12,
     length: 60 + Math.random() * 140,
-    opacity: 0.15 + Math.random() * 0.35,
+    opacity: 0.06 + Math.random() * 0.15,
     thickness: 1 + Math.random() * 1.5,
     color: STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
   };
@@ -60,7 +60,7 @@ const ShootingStar = memo(function ShootingStar({ star }: { star: Star }) {
             width: star.thickness * 2 + 1,
             height: star.thickness * 2 + 1,
             background: star.color,
-            boxShadow: `0 0 ${star.thickness * 4}px ${star.color}, 0 0 ${star.thickness * 8}px ${star.color}`,
+            boxShadow: `0 0 ${star.thickness * 2}px ${star.color}88, 0 0 ${star.thickness * 4}px ${star.color}44`,
             left: 0,
             top: -star.thickness,
           }}
