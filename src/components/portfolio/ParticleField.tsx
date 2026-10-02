@@ -35,7 +35,6 @@ const vertexShader = /* glsl */ `
     vAlpha = aAlpha;
 
     vec3 pos = position;
-    // Gentle undulation
     pos.x += sin(uTime * 0.3 + position.y * 0.5) * 0.08;
     pos.y += cos(uTime * 0.25 + position.z * 0.5) * 0.08;
     pos.z += sin(uTime * 0.2 + position.x * 0.4) * 0.06;
@@ -55,7 +54,6 @@ const fragmentShader = /* glsl */ `
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
 
-    // Softer glow with no white core, so overlapping particles stay colorful.
     float strength = 1.0 - (dist * 2.0);
     strength = pow(strength, 2.2);
     vec3 finalColor = vColor * 0.82;
@@ -64,14 +62,8 @@ const fragmentShader = /* glsl */ `
   }
 `;
 
-/* ============================================================
-   MOUSE TRACKER (shared ref across components)
-   ============================================================ */
 const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
 
-/* ============================================================
-   ERROR BOUNDARY — catches WebGL / Three.js crashes
-   ============================================================ */
 interface EBProps {
   children: ReactNode;
   fallback: ReactNode;
@@ -100,9 +92,6 @@ class ThreeErrorBoundary extends Component<EBProps, EBState> {
   }
 }
 
-/* ============================================================
-   CAMERA RIG — parallax mouse reactivity
-   ============================================================ */
 function CameraRig() {
   const { camera } = useThree();
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
@@ -129,9 +118,6 @@ function CameraRig() {
   return null;
 }
 
-/* ============================================================
-   PARTICLE NEBULA — spiral galaxy formation
-   ============================================================ */
 const ParticleNebula = React.memo(function ParticleNebula() {
   const pointsRef = useRef<THREE.Points>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
@@ -147,8 +133,6 @@ const ParticleNebula = React.memo(function ParticleNebula() {
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
-
-      // Spiral galaxy distribution
       const radius = Math.random() * 5 + 0.2;
       const armAngle = ((i % ARMS) / ARMS) * Math.PI * 2;
       const spinAngle = radius * 0.8;
@@ -159,7 +143,6 @@ const ParticleNebula = React.memo(function ParticleNebula() {
       pos[i3 + 1] = scatterY;
       pos[i3 + 2] = Math.sin(armAngle + spinAngle) * radius + scatter * 0.5;
 
-      // Bias toward cyan/purple while preserving accent colors.
       const colorIndex = Math.random() < 0.4 ? 0
         : Math.random() < 0.65 ? 1
         : Math.random() < 0.82 ? 2
@@ -169,15 +152,12 @@ const ParticleNebula = React.memo(function ParticleNebula() {
       col[i3 + 1] = Math.min(1, c.g + (Math.random() - 0.5) * 0.08);
       col[i3 + 2] = Math.min(1, c.b + (Math.random() - 0.5) * 0.08);
 
-      // Smaller particles reduce bright clusters near the center.
       const distFromCenter = radius / 5;
       siz[i] = (Math.random() * 2.1 + 0.8) * (1 - distFromCenter * 0.45);
-
-      // Lower alpha prevents the center from turning into a white strip.
       alp[i] = Math.random() * 0.09 + 0.025 + (1 - distFromCenter) * 0.035;
     }
 
-    return { positions: pos, colors: col, sizes, alphas: alp };
+    return { positions: pos, colors: col, sizes: siz, alphas: alp };
   }, []);
 
   const geometry = useMemo(() => {
@@ -218,26 +198,11 @@ const ParticleNebula = React.memo(function ParticleNebula() {
   );
 });
 
-/* ============================================================
-   WIREFRAME SHAPES — rotating geometric shapes with glow
-   ============================================================ */
-
 const TorusKnotWireframe = React.memo(function TorusKnotWireframe() {
   const meshRef = useRef<THREE.Mesh>(null);
-
-  const geometry = useMemo(
-    () => new THREE.TorusKnotGeometry(1.8, 0.6, 128, 16, 2, 3),
-    []
-  );
-
+  const geometry = useMemo(() => new THREE.TorusKnotGeometry(1.8, 0.6, 128, 16, 2, 3), []);
   const material = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color: CYAN,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.045,
-      }),
+    () => new THREE.MeshBasicMaterial({ color: CYAN, wireframe: true, transparent: true, opacity: 0.045 }),
     []
   );
 
@@ -257,20 +222,9 @@ const TorusKnotWireframe = React.memo(function TorusKnotWireframe() {
 
 const IcosahedronWireframe = React.memo(function IcosahedronWireframe() {
   const meshRef = useRef<THREE.Mesh>(null);
-
-  const geometry = useMemo(
-    () => new THREE.IcosahedronGeometry(1.2, 1),
-    []
-  );
-
+  const geometry = useMemo(() => new THREE.IcosahedronGeometry(1.2, 1), []);
   const material = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color: PURPLE,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.055,
-      }),
+    () => new THREE.MeshBasicMaterial({ color: PURPLE, wireframe: true, transparent: true, opacity: 0.055 }),
     []
   );
 
@@ -291,20 +245,9 @@ const IcosahedronWireframe = React.memo(function IcosahedronWireframe() {
 
 const OctahedronWireframe = React.memo(function OctahedronWireframe() {
   const meshRef = useRef<THREE.Mesh>(null);
-
-  const geometry = useMemo(
-    () => new THREE.OctahedronGeometry(0.7, 0),
-    []
-  );
-
+  const geometry = useMemo(() => new THREE.OctahedronGeometry(0.7, 0), []);
   const material = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color: AMBER,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.06,
-      }),
+    () => new THREE.MeshBasicMaterial({ color: AMBER, wireframe: true, transparent: true, opacity: 0.06 }),
     []
   );
 
@@ -325,10 +268,6 @@ const OctahedronWireframe = React.memo(function OctahedronWireframe() {
   );
 });
 
-/* ============================================================
-   ORBITAL RINGS — thin torus rings at different angles
-   ============================================================ */
-
 const OrbitalRing = React.memo(function OrbitalRing({
   radius,
   rotation,
@@ -343,19 +282,9 @@ const OrbitalRing = React.memo(function OrbitalRing({
   opacity: number;
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
-
-  const geometry = useMemo(
-    () => new THREE.TorusGeometry(radius, 0.005, 8, 200),
-    [radius]
-  );
-
+  const geometry = useMemo(() => new THREE.TorusGeometry(radius, 0.005, 8, 200), [radius]);
   const material = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({
-        color,
-        transparent: true,
-        opacity,
-      }),
+    () => new THREE.MeshBasicMaterial({ color, transparent: true, opacity }),
     [color, opacity]
   );
 
@@ -364,42 +293,19 @@ const OrbitalRing = React.memo(function OrbitalRing({
     meshRef.current.rotation.z = state.clock.elapsedTime * speed;
   });
 
-  return (
-    <mesh ref={meshRef} geometry={geometry} material={material} rotation={rotation} />
-  );
+  return <mesh ref={meshRef} geometry={geometry} material={material} rotation={rotation} />;
 });
 
 const OrbitalRings = React.memo(function OrbitalRings() {
   return (
     <group>
-      <OrbitalRing
-        radius={3.2}
-        rotation={[Math.PI * 0.5, 0, 0]}
-        speed={0.08}
-        color={CYAN}
-        opacity={0.08}
-      />
-      <OrbitalRing
-        radius={4.0}
-        rotation={[Math.PI * 0.35, Math.PI * 0.25, 0]}
-        speed={-0.06}
-        color={PURPLE}
-        opacity={0.07}
-      />
-      <OrbitalRing
-        radius={2.6}
-        rotation={[Math.PI * 0.7, Math.PI * -0.15, Math.PI * 0.1]}
-        speed={0.1}
-        color={AMBER}
-        opacity={0.055}
-      />
+      <OrbitalRing radius={3.2} rotation={[Math.PI * 0.5, 0, 0]} speed={0.08} color={CYAN} opacity={0.08} />
+      <OrbitalRing radius={4.0} rotation={[Math.PI * 0.35, Math.PI * 0.25, 0]} speed={-0.06} color={PURPLE} opacity={0.07} />
+      <OrbitalRing radius={2.6} rotation={[Math.PI * 0.7, Math.PI * -0.15, Math.PI * 0.1]} speed={0.1} color={AMBER} opacity={0.055} />
     </group>
   );
 });
 
-/* ============================================================
-   SCENE CONTENT — all 3D objects
-   ============================================================ */
 function SceneContent() {
   return (
     <>
@@ -413,23 +319,15 @@ function SceneContent() {
   );
 }
 
-/* ============================================================
-   FALLBACK — simple CSS gradient if WebGL fails
-   ============================================================ */
 function Fallback() {
   return (
     <div
       className="fixed inset-0 z-0"
-      style={{
-        background: 'radial-gradient(ellipse at 50% 50%, #0a0a2e 0%, #030014 70%)',
-      }}
+      style={{ background: 'radial-gradient(ellipse at 50% 50%, #0a0a2e 0%, #030014 70%)' }}
     />
   );
 }
 
-/* ============================================================
-   MAIN EXPORT — ParticleField component
-   ============================================================ */
 function hasWebGLSupport(): boolean {
   try {
     const canvas = document.createElement('canvas');
@@ -452,11 +350,7 @@ export default function ParticleField() {
       <ThreeErrorBoundary fallback={<Fallback />}>
         <Canvas
           camera={{ position: [0, 0, 5], fov: 60, near: 0.1, far: 100 }}
-          gl={{
-            antialias: false,
-            alpha: false,
-            powerPreference: 'high-performance',
-          }}
+          gl={{ antialias: false, alpha: false, powerPreference: 'high-performance' }}
           dpr={[1, 2]}
           style={{ background: BG_COLOR }}
           frameloop="always"
