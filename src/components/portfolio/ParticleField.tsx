@@ -2,14 +2,13 @@
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import React, { useRef, useMemo, useEffect, useState, Suspense, Component, type ReactNode } from 'react';
 import * as THREE from 'three';
 
 /* ============================================================
    CONSTANTS
    ============================================================ */
-const PARTICLE_COUNT = 2500;
+const PARTICLE_COUNT = 1700;
 const BG_COLOR = '#030014';
 const CYAN = new THREE.Color('#00f0ff');
 const PURPLE = new THREE.Color('#8b5cf6');
@@ -42,7 +41,7 @@ const vertexShader = /* glsl */ `
     pos.z += sin(uTime * 0.2 + position.x * 0.4) * 0.06;
 
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-    gl_PointSize = aSize * uPixelRatio * (180.0 / -mvPosition.z);
+    gl_PointSize = aSize * uPixelRatio * (155.0 / -mvPosition.z);
     gl_PointSize = max(gl_PointSize, 1.0);
     gl_Position = projectionMatrix * mvPosition;
   }
@@ -56,13 +55,10 @@ const fragmentShader = /* glsl */ `
     float dist = length(gl_PointCoord - vec2(0.5));
     if (dist > 0.5) discard;
 
-    // Soft glow falloff
+    // Softer glow with no white core, so overlapping particles stay colorful.
     float strength = 1.0 - (dist * 2.0);
-    strength = pow(strength, 1.8);
-
-    // Core brightness (subtle, no white blowout)
-    float core = 1.0 - smoothstep(0.0, 0.15, dist);
-    vec3 finalColor = mix(vColor, vec3(1.0), core * 0.15);
+    strength = pow(strength, 2.2);
+    vec3 finalColor = vColor * 0.82;
 
     gl_FragColor = vec4(finalColor, strength * vAlpha);
   }
@@ -159,30 +155,29 @@ const ParticleNebula = React.memo(function ParticleNebula() {
       const scatter = (Math.random() - 0.5) * ARM_SPREAD * (radius * 0.6 + 0.3);
       const scatterY = (Math.random() - 0.5) * 0.8 * (1.0 / (radius * 0.3 + 0.5));
 
-      pos[i3]     = Math.cos(armAngle + spinAngle) * radius + scatter;
+      pos[i3] = Math.cos(armAngle + spinAngle) * radius + scatter;
       pos[i3 + 1] = scatterY;
       pos[i3 + 2] = Math.sin(armAngle + spinAngle) * radius + scatter * 0.5;
 
-      // Color — bias toward cyan/purple with occasional amber/white
-      const colorIndex = Math.random() < 0.35 ? 0
-        : Math.random() < 0.55 ? 1
-        : Math.random() < 0.8  ? 2
+      // Bias toward cyan/purple while preserving accent colors.
+      const colorIndex = Math.random() < 0.4 ? 0
+        : Math.random() < 0.65 ? 1
+        : Math.random() < 0.82 ? 2
         : 3;
       const c = PALETTE[colorIndex];
-      // Add slight variation
-      col[i3]     = Math.min(1, c.r + (Math.random() - 0.5) * 0.15);
-      col[i3 + 1] = Math.min(1, c.g + (Math.random() - 0.5) * 0.15);
-      col[i3 + 2] = Math.min(1, c.b + (Math.random() - 0.5) * 0.15);
+      col[i3] = Math.min(1, c.r + (Math.random() - 0.5) * 0.08);
+      col[i3 + 1] = Math.min(1, c.g + (Math.random() - 0.5) * 0.08);
+      col[i3 + 2] = Math.min(1, c.b + (Math.random() - 0.5) * 0.08);
 
-      // Size — brighter particles near center
+      // Smaller particles reduce bright clusters near the center.
       const distFromCenter = radius / 5;
-      siz[i] = (Math.random() * 3 + 1) * (1 - distFromCenter * 0.5);
+      siz[i] = (Math.random() * 2.1 + 0.8) * (1 - distFromCenter * 0.45);
 
-      // Alpha — toned down so particles don't overpower content
-      alp[i] = Math.random() * 0.25 + 0.08 + (1 - distFromCenter) * 0.08;
+      // Lower alpha prevents the center from turning into a white strip.
+      alp[i] = Math.random() * 0.09 + 0.025 + (1 - distFromCenter) * 0.035;
     }
 
-    return { positions: pos, colors: col, sizes: siz, alphas: alp };
+    return { positions: pos, colors: col, sizes, alphas: alp };
   }, []);
 
   const geometry = useMemo(() => {
@@ -217,7 +212,7 @@ const ParticleNebula = React.memo(function ParticleNebula() {
         uniforms={uniforms}
         transparent
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        blending={THREE.NormalBlending}
       />
     </points>
   );
@@ -241,7 +236,7 @@ const TorusKnotWireframe = React.memo(function TorusKnotWireframe() {
         color: CYAN,
         wireframe: true,
         transparent: true,
-        opacity: 0.07,
+        opacity: 0.045,
       }),
     []
   );
@@ -274,7 +269,7 @@ const IcosahedronWireframe = React.memo(function IcosahedronWireframe() {
         color: PURPLE,
         wireframe: true,
         transparent: true,
-        opacity: 0.09,
+        opacity: 0.055,
       }),
     []
   );
@@ -308,7 +303,7 @@ const OctahedronWireframe = React.memo(function OctahedronWireframe() {
         color: AMBER,
         wireframe: true,
         transparent: true,
-        opacity: 0.1,
+        opacity: 0.06,
       }),
     []
   );
@@ -318,7 +313,6 @@ const OctahedronWireframe = React.memo(function OctahedronWireframe() {
     const t = state.clock.elapsedTime;
     meshRef.current.rotation.x = t * 0.15;
     meshRef.current.rotation.z = t * 0.1;
-    // Orbiting motion
     meshRef.current.position.x = Math.cos(t * 0.2) * 2.5;
     meshRef.current.position.y = Math.sin(t * 0.18) * 1.5;
     meshRef.current.position.z = Math.sin(t * 0.22) * 1.0;
@@ -383,21 +377,21 @@ const OrbitalRings = React.memo(function OrbitalRings() {
         rotation={[Math.PI * 0.5, 0, 0]}
         speed={0.08}
         color={CYAN}
-        opacity={0.15}
+        opacity={0.08}
       />
       <OrbitalRing
         radius={4.0}
         rotation={[Math.PI * 0.35, Math.PI * 0.25, 0]}
         speed={-0.06}
         color={PURPLE}
-        opacity={0.12}
+        opacity={0.07}
       />
       <OrbitalRing
         radius={2.6}
         rotation={[Math.PI * 0.7, Math.PI * -0.15, Math.PI * 0.1]}
         speed={0.1}
         color={AMBER}
-        opacity={0.1}
+        opacity={0.055}
       />
     </group>
   );
@@ -470,14 +464,6 @@ export default function ParticleField() {
           <Suspense fallback={null}>
             <color attach="background" args={[BG_COLOR]} />
             <SceneContent />
-            <EffectComposer>
-              <Bloom
-                intensity={0.4}
-                luminanceThreshold={0.4}
-                luminanceSmoothing={0.9}
-                mipmapBlur
-              />
-            </EffectComposer>
           </Suspense>
         </Canvas>
       </ThreeErrorBoundary>
