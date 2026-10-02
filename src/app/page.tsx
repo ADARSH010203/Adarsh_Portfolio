@@ -42,6 +42,22 @@ export default function Home() {
         <Aurora />
         <ParticleField />
         <ShootingStars />
+
+        {/*
+          Readability shield: keeps the animated WebGL background visible while
+          preventing particle/bloom highlights from washing out page content.
+          This layer sits above the background effects (z-0) and below all
+          portfolio content (z-10).
+        */}
+        <div
+          className="fixed inset-0 z-[1] pointer-events-none"
+          aria-hidden="true"
+          style={{
+            background:
+              'radial-gradient(circle at 50% 12%, rgba(3, 7, 18, 0.42) 0%, rgba(3, 7, 18, 0.58) 42%, rgba(2, 6, 23, 0.72) 100%)',
+          }}
+        />
+
         <div className="relative z-10 flex flex-col min-h-screen">
           <Navbar />
           <main className="flex-1">
