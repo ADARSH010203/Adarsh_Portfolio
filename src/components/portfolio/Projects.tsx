@@ -1,7 +1,12 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  useReducedMotion,
+} from 'framer-motion';
 import {
   ArrowUpRight,
   Clock,
@@ -13,6 +18,7 @@ import {
   ShieldCheck,
   Sparkles,
   Star,
+  Zap,
 } from 'lucide-react';
 
 interface GitHubRepo {
@@ -166,9 +172,11 @@ function ProjectMeta({ repo }: { repo: GitHubRepo }) {
     <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-500">
       {repo.language && (
         <span className="flex items-center gap-1.5">
-          <span
+          <motion.span
             className="h-2.5 w-2.5 rounded-full"
             style={{ backgroundColor: langColor ?? '#8b8b8b' }}
+            animate={{ opacity: [0.55, 1, 0.55], scale: [0.9, 1.12, 0.9] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
           />
           {repo.language}
         </span>
@@ -190,12 +198,32 @@ function ProjectMeta({ repo }: { repo: GitHubRepo }) {
   );
 }
 
-function ArchitectureFlow({ items, accent }: { items: string[]; accent: string }) {
+function ArchitectureFlow({
+  items,
+  accent,
+  active,
+}: {
+  items: string[];
+  accent: string;
+  active: boolean;
+}) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <div className="flex flex-wrap items-center gap-2">
       {items.map((item, index) => (
         <div key={item} className="flex items-center gap-2">
-          <span
+          <motion.span
+            initial={{ opacity: 0, y: 10, scale: 0.94 }}
+            animate={active ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{
+              duration: 0.38,
+              delay: 0.2 + index * 0.09,
+              type: 'spring',
+              stiffness: 180,
+              damping: 18,
+            }}
+            whileHover={reduceMotion ? undefined : { y: -2, scale: 1.04 }}
             className="rounded-md border px-2.5 py-1 text-[11px] font-mono"
             style={{
               borderColor: `${accent}2b`,
@@ -204,9 +232,30 @@ function ArchitectureFlow({ items, accent }: { items: string[]; accent: string }
             }}
           >
             {item}
-          </span>
+          </motion.span>
+
           {index < items.length - 1 && (
-            <span className="hidden text-slate-700 sm:inline">→</span>
+            <motion.span
+              className="relative hidden w-5 overflow-hidden text-center text-slate-700 sm:inline-block"
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={active ? { opacity: 1, scaleX: 1 } : {}}
+              transition={{ duration: 0.3, delay: 0.28 + index * 0.09 }}
+            >
+              <span>→</span>
+              {!reduceMotion && (
+                <motion.span
+                  className="absolute left-0 top-1/2 h-1 w-1 -translate-y-1/2 rounded-full"
+                  style={{ backgroundColor: accent }}
+                  animate={{ x: [0, 16], opacity: [0, 0.9, 0] }}
+                  transition={{
+                    duration: 1.35,
+                    repeat: Infinity,
+                    delay: index * 0.18,
+                    ease: 'easeInOut',
+                  }}
+                />
+              )}
+            </motion.span>
           )}
         </div>
       ))}
@@ -224,126 +273,242 @@ function FlagshipCard({
   index: number;
 }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const inView = useInView(ref, { once: true, margin: '-90px' });
+  const reduceMotion = useReducedMotion();
 
   return (
     <motion.article
       ref={ref}
-      initial={{ opacity: 0, y: 36 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay: index * 0.08 }}
+      initial={{ opacity: 0, y: 58, scale: 0.975 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        duration: 0.68,
+        delay: index * 0.11,
+        type: 'spring',
+        stiffness: 95,
+        damping: 18,
+      }}
+      whileHover={reduceMotion ? undefined : { y: -7, scale: 1.004 }}
       className="group relative overflow-hidden rounded-3xl border border-white/[0.08] bg-slate-950/55 backdrop-blur-xl"
     >
-      <div
+      <motion.div
         className="absolute inset-x-0 top-0 h-px"
         style={{ background: `linear-gradient(90deg, transparent, ${study.accent}, transparent)` }}
+        initial={{ opacity: 0, scaleX: 0.2 }}
+        animate={inView ? { opacity: 1, scaleX: 1 } : {}}
+        transition={{ duration: 0.7, delay: 0.15 + index * 0.08 }}
       />
-      <div
-        className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full blur-3xl transition-opacity duration-500 group-hover:opacity-100"
-        style={{ backgroundColor: `${study.accent}12`, opacity: 0.7 }}
+
+      <motion.div
+        className="pointer-events-none absolute -top-20 h-40 w-1/3 -skew-x-12 blur-2xl"
+        style={{ background: `linear-gradient(90deg, transparent, ${study.accent}16, transparent)` }}
+        animate={
+          reduceMotion
+            ? undefined
+            : { x: ['-140%', '420%'], opacity: [0, 0.7, 0] }
+        }
+        transition={{
+          duration: 5.8,
+          repeat: Infinity,
+          repeatDelay: 2.4 + index * 0.5,
+          ease: 'easeInOut',
+        }}
+      />
+
+      <motion.div
+        className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full blur-3xl"
+        style={{ backgroundColor: `${study.accent}10` }}
+        animate={
+          reduceMotion
+            ? undefined
+            : {
+                x: [0, -16, 0],
+                y: [0, 12, 0],
+                scale: [1, 1.08, 1],
+                opacity: [0.45, 0.7, 0.45],
+              }
+        }
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       <div className="relative p-6 sm:p-8">
         <div className="mb-7 flex items-start justify-between gap-5">
           <div>
-            <div className="mb-3 flex flex-wrap items-center gap-2">
+            <motion.div
+              className="mb-3 flex flex-wrap items-center gap-2"
+              initial={{ opacity: 0, x: -14 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.42, delay: 0.14 + index * 0.08 }}
+            >
               <span className="font-mono text-xs text-slate-600">0{index + 1}</span>
               <span className="text-slate-700">/</span>
-              <span
+              <motion.span
                 className="rounded-full border px-3 py-1 text-[10px] font-mono uppercase tracking-[0.18em]"
                 style={{
                   borderColor: `${study.accent}2b`,
                   backgroundColor: `${study.accent}0b`,
                   color: study.accent,
                 }}
+                animate={
+                  reduceMotion
+                    ? undefined
+                    : { y: [0, -2, 0], boxShadow: [`0 0 0 ${study.accent}00`, `0 0 18px ${study.accent}18`, `0 0 0 ${study.accent}00`] }
+                }
+                transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
               >
                 {study.category}
-              </span>
-            </div>
-            <h3 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              </motion.span>
+            </motion.div>
+
+            <motion.h3
+              initial={{ opacity: 0, y: 14 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 + index * 0.08 }}
+              className="text-2xl font-bold tracking-tight text-white sm:text-3xl"
+            >
               {study.displayName}
-            </h3>
+            </motion.h3>
           </div>
 
-          <a
+          <motion.a
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Open ${study.displayName} on GitHub`}
-            className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5 text-slate-500 transition hover:border-white/20 hover:text-white"
+            whileHover={reduceMotion ? undefined : { scale: 1.1, rotate: -5 }}
+            whileTap={{ scale: 0.94 }}
+            className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5 text-slate-500 transition-colors hover:border-white/20 hover:text-white"
           >
             <Github size={18} />
-          </a>
+          </motion.a>
         </div>
 
-        <p className="max-w-4xl text-sm leading-7 text-slate-300 sm:text-[15px]">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.48, delay: 0.28 + index * 0.08 }}
+          className="max-w-4xl text-sm leading-7 text-slate-300 sm:text-[15px]"
+        >
           {study.summary}
-        </p>
+        </motion.p>
 
         <div className="mt-7 grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
-          <div className="rounded-2xl border border-white/[0.06] bg-black/20 p-4 sm:p-5">
+          <motion.div
+            initial={{ opacity: 0, x: -22 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.34 + index * 0.08 }}
+            whileHover={reduceMotion ? undefined : { y: -2 }}
+            className="rounded-2xl border border-white/[0.06] bg-black/20 p-4 sm:p-5"
+          >
             <div className="mb-4 flex items-center gap-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-500">
-              <Network size={14} style={{ color: study.accent }} />
+              <motion.span
+                animate={reduceMotion ? undefined : { rotate: [0, 8, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <Network size={14} style={{ color: study.accent }} />
+              </motion.span>
               Architecture snapshot
             </div>
-            <ArchitectureFlow items={study.architecture} accent={study.accent} />
-          </div>
+            <ArchitectureFlow items={study.architecture} accent={study.accent} active={inView} />
+          </motion.div>
 
-          <div className="rounded-2xl border border-white/[0.06] bg-black/20 p-4 sm:p-5">
+          <motion.div
+            initial={{ opacity: 0, x: 22 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 + index * 0.08 }}
+            whileHover={reduceMotion ? undefined : { y: -2 }}
+            className="rounded-2xl border border-white/[0.06] bg-black/20 p-4 sm:p-5"
+          >
             <div className="mb-3 flex items-center gap-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-500">
               <ShieldCheck size={14} style={{ color: study.accent }} />
               Engineering signals
             </div>
             <ul className="space-y-2.5">
-              {study.proof.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm text-slate-400">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: study.accent }} />
+              {study.proof.map((item, proofIndex) => (
+                <motion.li
+                  key={item}
+                  initial={{ opacity: 0, x: 12 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.35, delay: 0.52 + proofIndex * 0.08 + index * 0.06 }}
+                  className="flex items-start gap-2 text-sm text-slate-400"
+                >
+                  <motion.span
+                    className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
+                    style={{ backgroundColor: study.accent }}
+                    animate={reduceMotion ? undefined : { scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
+                    transition={{ duration: 2.4, repeat: Infinity, delay: proofIndex * 0.25 }}
+                  />
                   {item}
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <motion.div
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.055, delayChildren: 0.55 } },
+          }}
+          className="mt-6 flex flex-wrap gap-2"
+        >
           {study.stack.map((item) => (
-            <span
+            <motion.span
               key={item}
+              variants={{
+                hidden: { opacity: 0, y: 8, scale: 0.94 },
+                visible: { opacity: 1, y: 0, scale: 1 },
+              }}
+              whileHover={reduceMotion ? undefined : { y: -3, scale: 1.04 }}
               className="rounded-md border border-white/[0.07] bg-white/[0.025] px-2.5 py-1 text-[11px] font-mono text-slate-400"
             >
               {item}
-            </span>
+            </motion.span>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-7 flex flex-col gap-4 border-t border-white/[0.06] pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.45, delay: 0.65 + index * 0.06 }}
+          className="mt-7 flex flex-col gap-4 border-t border-white/[0.06] pt-5 sm:flex-row sm:items-center sm:justify-between"
+        >
           <ProjectMeta repo={repo} />
           <div className="flex flex-wrap gap-2">
-            <a
+            <motion.a
               href={repo.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition"
+              whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              className="group inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium"
               style={{
                 color: study.accent,
                 backgroundColor: `${study.accent}0d`,
                 border: `1px solid ${study.accent}25`,
               }}
             >
-              Source code <ArrowUpRight size={14} />
-            </a>
+              Source code
+              <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </motion.a>
+
             {repo.homepage && (
-              <a
+              <motion.a
                 href={repo.homepage}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm font-medium text-slate-300 transition hover:border-white/20 hover:text-white"
+                whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                className="group inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-white/20 hover:text-white"
               >
-                Live project <ExternalLink size={14} />
-              </a>
+                Live project
+                <ExternalLink size={14} className="transition-transform duration-300 group-hover:scale-110" />
+              </motion.a>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
     </motion.article>
   );
@@ -352,6 +517,7 @@ function FlagshipCard({
 function RepoCard({ repo, index }: { repo: GitHubRepo; index: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
+  const reduceMotion = useReducedMotion();
 
   return (
     <motion.a
@@ -359,32 +525,53 @@ function RepoCard({ repo, index }: { repo: GitHubRepo; index: number }) {
       href={repo.html_url}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.4, delay: Math.min(index * 0.04, 0.28) }}
-      className="group flex min-h-44 flex-col rounded-2xl border border-white/[0.07] bg-slate-950/45 p-5 backdrop-blur-lg transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/20 hover:bg-slate-950/65"
+      initial={{ opacity: 0, y: 30, scale: 0.97 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        duration: 0.46,
+        delay: Math.min(index * 0.055, 0.38),
+        type: 'spring',
+        stiffness: 125,
+        damping: 18,
+      }}
+      whileHover={reduceMotion ? undefined : { y: -7, scale: 1.012 }}
+      className="group relative flex min-h-44 flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-slate-950/45 p-5 backdrop-blur-lg transition-colors duration-300 hover:border-cyan-300/20 hover:bg-slate-950/65"
     >
-      <div className="mb-3 flex items-start justify-between gap-3">
+      <div className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/3 rotate-12 bg-gradient-to-r from-transparent via-cyan-200/[0.035] to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[460%]" />
+
+      <div className="relative mb-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <div className="mb-1 text-[10px] font-mono uppercase tracking-[0.16em] text-slate-600">GitHub project</div>
+          <motion.div
+            className="mb-1 text-[10px] font-mono uppercase tracking-[0.16em] text-slate-600"
+            animate={reduceMotion ? undefined : { opacity: [0.55, 0.9, 0.55] }}
+            transition={{ duration: 3.2, repeat: Infinity, delay: index * 0.12 }}
+          >
+            GitHub project
+          </motion.div>
           <h4 className="truncate font-semibold text-white transition-colors group-hover:text-cyan-300">
             {prettyName(repo.name)}
           </h4>
         </div>
-        <ArrowUpRight size={15} className="mt-1 shrink-0 text-slate-700 transition group-hover:text-cyan-300" />
+        <ArrowUpRight size={15} className="mt-1 shrink-0 text-slate-700 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-cyan-300" />
       </div>
 
-      <p className="mb-5 line-clamp-3 text-sm leading-6 text-slate-500">
+      <p className="relative mb-5 line-clamp-3 text-sm leading-6 text-slate-500">
         {repo.description || 'Explore the repository for implementation details, experiments, and source code.'}
       </p>
 
-      <div className="mt-auto">
+      <div className="relative mt-auto">
         {repo.topics.length > 0 && (
           <div className="mb-4 flex flex-wrap gap-1.5">
-            {repo.topics.slice(0, 3).map((topic) => (
-              <span key={topic} className="rounded-md border border-white/[0.06] px-2 py-0.5 text-[10px] font-mono text-slate-600">
+            {repo.topics.slice(0, 3).map((topic, topicIndex) => (
+              <motion.span
+                key={topic}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: 0.18 + index * 0.03 + topicIndex * 0.05 }}
+                className="rounded-md border border-white/[0.06] px-2 py-0.5 text-[10px] font-mono text-slate-600"
+              >
                 {topic}
-              </span>
+              </motion.span>
             ))}
           </div>
         )}
@@ -398,7 +585,12 @@ function Skeleton() {
   return (
     <div className="space-y-5">
       {Array.from({ length: 4 }).map((_, i) => (
-        <div key={i} className="h-80 animate-pulse rounded-3xl border border-white/[0.06] bg-white/[0.02]" />
+        <motion.div
+          key={i}
+          className="h-80 rounded-3xl border border-white/[0.06] bg-white/[0.02]"
+          animate={{ opacity: [0.35, 0.7, 0.35] }}
+          transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.12 }}
+        />
       ))}
     </div>
   );
@@ -407,6 +599,7 @@ function Skeleton() {
 export default function Projects() {
   const sectionRef = useRef(null);
   const sectionInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const reduceMotion = useReducedMotion();
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -449,40 +642,118 @@ export default function Projects() {
   );
 
   return (
-    <section id="projects" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8" ref={sectionRef}>
+    <section id="projects" className="relative overflow-hidden py-24 sm:py-32">
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-48 top-20 h-80 w-80 rounded-full bg-cyan-500/[0.035] blur-3xl"
+        animate={
+          reduceMotion
+            ? undefined
+            : { x: [0, 70, 0], y: [0, 35, 0], scale: [1, 1.12, 1] }
+        }
+        transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-52 top-[34%] h-96 w-96 rounded-full bg-violet-500/[0.035] blur-3xl"
+        animate={
+          reduceMotion
+            ? undefined
+            : { x: [0, -60, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }
+        }
+        transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
+      />
+
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8" ref={sectionRef}>
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 42 }}
           animate={sectionInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.68, type: 'spring', stiffness: 95, damping: 18 }}
           className="mb-14"
         >
           <div className="mb-5 flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/15 bg-emerald-400/[0.05] px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-300">
+            <motion.span
+              className="inline-flex items-center gap-2 rounded-full border border-emerald-400/15 bg-emerald-400/[0.05] px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-300"
+              animate={
+                reduceMotion
+                  ? undefined
+                  : { y: [0, -3, 0], boxShadow: ['0 0 0 rgba(52,211,153,0)', '0 0 22px rgba(52,211,153,0.08)', '0 0 0 rgba(52,211,153,0)'] }
+              }
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            >
               <Sparkles size={12} /> Selected engineering work
-            </span>
-            <span className="text-xs font-mono text-slate-600">Real repositories • architecture-first</span>
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, x: -10 }}
+              animate={sectionInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 0.18, duration: 0.42 }}
+              className="text-xs font-mono text-slate-600"
+            >
+              Real repositories • architecture-first
+            </motion.span>
           </div>
 
           <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
             <div>
-              <h2 className="max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={sectionInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.12, duration: 0.52 }}
+                className="max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl"
+              >
                 Systems I&apos;ve <span className="gradient-text">designed & built</span>
-              </h2>
-              <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-400 sm:text-base">
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={sectionInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.22, duration: 0.48 }}
+                className="mt-5 max-w-3xl text-sm leading-7 text-slate-400 sm:text-base"
+              >
                 A recruiter-friendly view of my strongest work: what each system does, how the architecture is structured, and which engineering decisions are visible in the codebase.
-              </p>
+              </motion.p>
             </div>
 
-            <div className="rounded-2xl border border-white/[0.07] bg-slate-950/45 p-5 backdrop-blur-lg">
+            <motion.div
+              initial={{ opacity: 0, x: 30, scale: 0.97 }}
+              animate={sectionInView ? { opacity: 1, x: 0, scale: 1 } : {}}
+              transition={{ delay: 0.24, duration: 0.55, type: 'spring', stiffness: 110, damping: 18 }}
+              whileHover={reduceMotion ? undefined : { y: -4, scale: 1.01 }}
+              className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-slate-950/45 p-5 backdrop-blur-lg"
+            >
+              <motion.div
+                className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-cyan-300/60 to-transparent"
+                animate={reduceMotion ? undefined : { opacity: [0.25, 0.9, 0.25] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              />
               <div className="mb-3 flex items-center gap-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-500">
-                <Layers3 size={14} className="text-cyan-300" /> Engineering focus
+                <motion.span
+                  animate={reduceMotion ? undefined : { rotate: [0, 6, -6, 0], scale: [1, 1.08, 1] }}
+                  transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <Layers3 size={14} className="text-cyan-300" />
+                </motion.span>
+                Engineering focus
               </div>
               <p className="text-sm leading-6 text-slate-400">
                 Multi-agent orchestration, LLM evaluation, retrieval systems, backend architecture, real-time workflows, and production-oriented application design.
               </p>
-            </div>
+            </motion.div>
           </div>
+
+          <motion.div
+            className="mt-8 h-px w-full overflow-hidden bg-white/[0.04]"
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={sectionInView ? { opacity: 1, scaleX: 1 } : {}}
+            transition={{ delay: 0.35, duration: 0.7 }}
+          >
+            {!reduceMotion && (
+              <motion.div
+                className="h-full w-24 bg-gradient-to-r from-transparent via-cyan-300/45 to-transparent"
+                animate={{ x: ['-120%', '1200%'] }}
+                transition={{ duration: 5, repeat: Infinity, repeatDelay: 1.5, ease: 'easeInOut' }}
+              />
+            )}
+          </motion.div>
         </motion.div>
 
         <AnimatePresence mode="wait">
@@ -491,8 +762,9 @@ export default function Projects() {
           ) : repos.length === 0 ? (
             <motion.div
               key="empty"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.97 }}
               className="rounded-2xl border border-white/10 bg-slate-950/55 p-10 text-center"
             >
               <p className="text-slate-400">GitHub projects are temporarily unavailable.</p>
@@ -506,7 +778,13 @@ export default function Projects() {
               </a>
             </motion.div>
           ) : (
-            <motion.div key="projects" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <motion.div
+              key="projects"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35 }}
+            >
               <div className="space-y-6">
                 {flagship.map(({ repo, study }, index) => (
                   <FlagshipCard key={study.repo} repo={repo} study={study} index={index} />
@@ -514,10 +792,22 @@ export default function Projects() {
               </div>
 
               {moreRepos.length > 0 && (
-                <div className="mt-20">
+                <motion.div
+                  className="mt-20"
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-90px' }}
+                  transition={{ duration: 0.58 }}
+                >
                   <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                      <span className="font-mono text-xs uppercase tracking-[0.18em] text-violet-300">More experiments & products</span>
+                      <motion.span
+                        className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-violet-300"
+                        animate={reduceMotion ? undefined : { opacity: [0.6, 1, 0.6] }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      >
+                        <Zap size={12} /> More experiments & products
+                      </motion.span>
                       <h3 className="mt-2 text-2xl font-bold text-white">Selected GitHub repositories</h3>
                     </div>
                     <p className="max-w-lg text-sm leading-6 text-slate-500">
@@ -530,21 +820,34 @@ export default function Projects() {
                       <RepoCard key={repo.name} repo={repo} index={index} />
                     ))}
                   </div>
-                </div>
+                </motion.div>
               )}
 
-              <div className="mt-12 flex justify-center">
-                <a
+              <motion.div
+                className="mt-12 flex justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45 }}
+              >
+                <motion.a
                   href="https://github.com/ADARSH010203?tab=repositories"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-slate-950/50 px-5 py-3 text-sm font-medium text-slate-300 transition hover:border-cyan-300/25 hover:text-cyan-300"
+                  whileHover={reduceMotion ? undefined : { y: -3, scale: 1.025 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-slate-950/50 px-5 py-3 text-sm font-medium text-slate-300 transition-colors hover:border-cyan-300/25 hover:text-cyan-300"
                 >
-                  <Github size={16} />
+                  <motion.span
+                    animate={reduceMotion ? undefined : { rotate: [0, 6, -6, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <Github size={16} />
+                  </motion.span>
                   Explore all repositories
-                  <ArrowUpRight size={14} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </a>
-              </div>
+                  <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </motion.a>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
