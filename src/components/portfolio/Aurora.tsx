@@ -2,116 +2,83 @@
 
 import { memo } from 'react';
 
-/* ============================================================
-   AURORA — CSS animated northern lights / aurora borealis
-   ============================================================ */
-
 const Aurora = memo(function Aurora() {
   return (
     <>
       <style>{`
         @keyframes aurora-drift-1 {
-          0%, 100% {
-            transform: translate(0%, 0%) scale(1) rotate(0deg);
-          }
-          25% {
-            transform: translate(10%, -5%) scale(1.1) rotate(3deg);
-          }
-          50% {
-            transform: translate(-5%, 5%) scale(0.95) rotate(-2deg);
-          }
-          75% {
-            transform: translate(5%, -3%) scale(1.05) rotate(1deg);
-          }
+          0%, 100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); }
+          50% { transform: translate3d(7%,-5%,0) scale(1.12) rotate(2deg); }
         }
         @keyframes aurora-drift-2 {
-          0%, 100% {
-            transform: translate(0%, 0%) scale(1) rotate(0deg);
-          }
-          33% {
-            transform: translate(-8%, 6%) scale(1.15) rotate(-4deg);
-          }
-          66% {
-            transform: translate(12%, -4%) scale(0.9) rotate(2deg);
-          }
+          0%, 100% { transform: translate3d(0,0,0) scale(1); }
+          50% { transform: translate3d(-8%,6%,0) scale(1.15); }
         }
         @keyframes aurora-drift-3 {
-          0%, 100% {
-            transform: translate(0%, 0%) scale(1);
-          }
-          50% {
-            transform: translate(-10%, 8%) scale(1.2);
-          }
+          0%, 100% { transform: translate3d(0,0,0) scale(1); }
+          50% { transform: translate3d(5%,-8%,0) scale(1.08); }
         }
         @keyframes aurora-pulse {
-          0%, 100% { opacity: 0.06; }
-          50% { opacity: 0.12; }
+          0%, 100% { opacity: .55; }
+          50% { opacity: .9; }
         }
       `}</style>
-      <div className="fixed inset-0 z-[0] pointer-events-none overflow-hidden">
-        {/* Cyan blob - top left */}
+
+      <div className="fixed inset-0 z-[0] pointer-events-none overflow-hidden bg-[#02030a]">
         <div
-          className="absolute"
+          className="absolute inset-0"
           style={{
-            top: '-20%',
-            left: '-10%',
-            width: '60vw',
-            height: '40vh',
-            background: 'radial-gradient(ellipse, rgba(0, 240, 255, 0.15) 0%, transparent 70%)',
-            filter: 'blur(80px)',
-            animation: 'aurora-drift-1 18s ease-in-out infinite, aurora-pulse 8s ease-in-out infinite',
+            background: [
+              'radial-gradient(circle at 18% 12%, rgba(0, 240, 255, 0.10), transparent 30%)',
+              'radial-gradient(circle at 78% 18%, rgba(124, 58, 237, 0.14), transparent 34%)',
+              'radial-gradient(circle at 48% 62%, rgba(14, 165, 233, 0.06), transparent 38%)',
+              'linear-gradient(180deg, #02030a 0%, #050816 46%, #02030a 100%)',
+            ].join(','),
           }}
         />
-        {/* Purple blob - center right */}
+
         <div
-          className="absolute"
+          className="absolute left-[-12%] top-[-18%] h-[46vh] w-[68vw]"
           style={{
-            top: '10%',
-            right: '-15%',
-            width: '55vw',
-            height: '45vh',
-            background: 'radial-gradient(ellipse, rgba(139, 92, 246, 0.12) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse, rgba(34,211,238,0.17) 0%, rgba(34,211,238,0.04) 42%, transparent 72%)',
             filter: 'blur(90px)',
-            animation: 'aurora-drift-2 22s ease-in-out infinite, aurora-pulse 10s ease-in-out 2s infinite',
+            animation: 'aurora-drift-1 22s ease-in-out infinite, aurora-pulse 10s ease-in-out infinite',
           }}
         />
-        {/* Green/teal blob - bottom left */}
+
         <div
-          className="absolute"
+          className="absolute right-[-18%] top-[2%] h-[52vh] w-[62vw]"
           style={{
-            bottom: '-10%',
-            left: '15%',
-            width: '50vw',
-            height: '35vh',
-            background: 'radial-gradient(ellipse, rgba(0, 255, 136, 0.08) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse, rgba(139,92,246,0.18) 0%, rgba(79,70,229,0.05) 46%, transparent 72%)',
             filter: 'blur(100px)',
-            animation: 'aurora-drift-3 25s ease-in-out infinite, aurora-pulse 12s ease-in-out 4s infinite',
+            animation: 'aurora-drift-2 26s ease-in-out infinite, aurora-pulse 13s ease-in-out 2s infinite',
           }}
         />
-        {/* Subtle cyan-purple blend - top center */}
+
         <div
-          className="absolute"
+          className="absolute bottom-[-16%] left-[8%] h-[44vh] w-[58vw]"
           style={{
-            top: '-5%',
-            left: '30%',
-            width: '40vw',
-            height: '30vh',
-            background: 'radial-gradient(ellipse, rgba(0, 240, 255, 0.06) 0%, rgba(139, 92, 246, 0.04) 40%, transparent 70%)',
-            filter: 'blur(120px)',
-            animation: 'aurora-drift-1 30s ease-in-out 5s infinite, aurora-pulse 15s ease-in-out 3s infinite',
+            background: 'radial-gradient(ellipse, rgba(8,145,178,0.10) 0%, rgba(16,185,129,0.025) 48%, transparent 74%)',
+            filter: 'blur(110px)',
+            animation: 'aurora-drift-3 30s ease-in-out infinite',
           }}
         />
-        {/* Amber accent blob - very subtle */}
+
         <div
-          className="absolute"
+          className="absolute inset-0 opacity-[0.22]"
           style={{
-            top: '40%',
-            right: '5%',
-            width: '30vw',
-            height: '25vh',
-            background: 'radial-gradient(ellipse, rgba(245, 158, 11, 0.05) 0%, transparent 70%)',
-            filter: 'blur(100px)',
-            animation: 'aurora-drift-2 28s ease-in-out 7s infinite',
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)',
+            backgroundSize: '56px 56px',
+            maskImage: 'linear-gradient(to bottom, black, transparent 88%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black, transparent 88%)',
+          }}
+        />
+
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(circle at center, transparent 35%, rgba(2,3,10,0.42) 82%, rgba(2,3,10,0.82) 100%)',
           }}
         />
       </div>
